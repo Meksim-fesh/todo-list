@@ -1,0 +1,74 @@
+{% extends "layouts/base.html" %}
+    
+{% block content %}
+
+    <div class="d-flex justify-content-between">
+        <div class="mt-3 mb-4">
+            <h1>TODO list</h1>
+        </div>
+        <div class="m-4">
+            <a href="{% url 'task:task-create' %}" class="btn btn-primary">Add task</a>
+        </div>
+    </div>
+
+    {% if task_list %}
+        
+        {% for task in task_list %}
+            <div class="fw-bold d-flex bd-highlight">
+                    {{task.content}}
+                    {% if task.is_completed %}
+                        <div class="text-success ms-2">
+                            Done
+                        </div>
+                    {% else %}
+                        <div class="text-danger ms-2">
+                            Not done
+                        </div>
+                    {% endif %}
+
+                <div class="ms-auto">
+                    <form action="{% url 'task:task-toggle-completion' %}" method="post">
+                        {% csrf_token %}
+                        <input type="number" name="task_id" id="task_id" value="{{ task.id }}" hidden>
+                        {% if task.is_completed %}
+                            <div class="me-2">
+                                <input type="submit" value="Complete" class="btn btn-success">
+                            </div>
+                        {% else %}
+                            <div class="me-2">
+                                <input type="submit" value="Undo" class="btn btn-secondary">
+                            </div>
+                        {% endif %}
+                    </form>
+                </div>
+
+            </div>
+            <p>
+                Created: {{task.datetime}}
+                {% if task.deadline %}
+                    <span class="text-danger">
+                        Deadline: {{task.deadline}}
+                    </span>
+                {% endif %}
+            </p>
+            <p>
+                Tags: 
+                {% for tag in task.tags.all %}
+                    {{tag.name}}
+                {% endfor %}
+
+                <span>
+                    <a href="{% url 'task:task-update' pk=task.id %}" class="fw-bold text-primary">Update</a>
+                </span>
+                <a href="{% url 'task:task-delete' pk=task.id %}" class="fw-bold text-primary">Delete</a>
+            </p>
+
+            <hr>
+        {% endfor %}
+
+    {% else %}
+        <p>There are no tasks!</p>
+    {% endif %}
+        
+{% endblock content %}
+    

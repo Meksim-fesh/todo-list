@@ -1,0 +1,13 @@
+{% extends "layouts/base.html" %}
+
+
+{% block content %}
+
+    <h2 class="m-4">Do you really want to delete this task?</h2>
+    <form action="" method="post" class="ms-3">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, I Do</button>
+    </form>
+
+{% endblock content %}
+    
