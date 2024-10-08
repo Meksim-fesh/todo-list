@@ -9,6 +9,10 @@ from task.models import Tag, Task
 class TaskListView(generic.ListView):
     model = Task
 
+    def get_queryset(self):
+        queryset = Task.objects.prefetch_related("tags")
+        return queryset
+
 
 class TaskCreateView(generic.CreateView):
     model = Task
