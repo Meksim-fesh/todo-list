@@ -23,6 +23,11 @@ urlpatterns = [
         views.TagUpdateView.as_view(),
         name="tag-update"
     ),
+    path(
+        "tags/<int:pk>/delete/",
+        views.TagDeleteView.as_view(),
+        name="tag-delete"
+    ),
 ]
 
 app_name = "task"
