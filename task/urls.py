@@ -17,6 +17,7 @@ urlpatterns = [
         name="task-update"
     ),
     path("tags/", views.TagListView.as_view(), name="tag-list"),
+    path("tags/create/", views.TagCreateView.as_view(), name="tag-create"),
 ]
 
 app_name = "task"
