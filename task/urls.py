@@ -16,6 +16,11 @@ urlpatterns = [
         views.TaskUpdateView.as_view(),
         name="task-update"
     ),
+    path(
+        "tasks/toggle-completion/",
+        views.ToggleTaskCompletion.as_view(),
+        name="task-toggle-completion"
+    ),
     path("tags/", views.TagListView.as_view(), name="tag-list"),
     path("tags/create/", views.TagCreateView.as_view(), name="tag-create"),
     path(
