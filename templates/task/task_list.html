@@ -23,8 +23,14 @@
             <p>Tags: 
                 {% for tag in task.tags.all %}
                     {{tag.name}}
-                {% endfor %}                    
+                {% endfor %}
             </p>
+
+            <form action="{% url 'task:task-toggle-completion' %}" method="post">
+                {% csrf_token %}
+                <input type="number" name="task_id" id="task_id" value="{{ task.id }}" hidden>
+                <input type="submit" value="change">
+            </form>
 
             <hr>
         {% endfor %}
