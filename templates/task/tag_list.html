@@ -1,0 +1,18 @@
+{% extends "layouts/base.html" %}
+
+
+{% block content %}
+    <h2>Tag list</h2>
+
+    
+    {% if tag_list %}
+        
+        {% for tag in tag_list %}
+            <p>Name: {{tag}}</p>
+        {% endfor %}
+    {% else %}
+    <p>There are no tags!</p>
+    {% endif %}
+        
+{% endblock content %}
+    
