@@ -7,6 +7,9 @@ class Tag(models.Model):
     def __str__(self) -> str:
         return self.name
 
+    class Meta:
+        ordering = ["name"]
+
 
 class Task(models.Model):
     content = models.CharField(max_length=256)
@@ -17,3 +20,6 @@ class Task(models.Model):
 
     def __str__(self) -> str:
         return self.content
+
+    class Meta:
+        ordering = ["is_completed", "-datetime"]
